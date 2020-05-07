@@ -4,9 +4,8 @@ import { getTodos } from '../../busineesLogic/todos';
 import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } from 'aws-lambda'
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
- const todos = await getTodos(event);
-
- return {
+ 
+  return {
   statusCode: 200,
   headers: {
     'Access-Control-Allow-Origin': '*'

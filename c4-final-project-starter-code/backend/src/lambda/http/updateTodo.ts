@@ -7,7 +7,6 @@ import { UpdateTodoRequest } from '../../requests/UpdateTodoRequest'
 import {updateTodo} from "../../busineesLogic/todos"; 
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  const todoId = event.pathParameters.todoId
   const updatedTodo: UpdateTodoRequest = JSON.parse(event.body)
 
   const updated = await updateTodo(event, updatedTodo);
@@ -19,6 +18,6 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true
     },
-    body: JSON.stringify(updateTodo)
+    body: JSON.stringify(updated)
   }
 }
