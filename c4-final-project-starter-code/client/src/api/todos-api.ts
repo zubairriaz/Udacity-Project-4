@@ -27,7 +27,8 @@ export async function createTodo(
       'Authorization': `Bearer ${idToken}`
     }
   })
-  return response.data.item
+  console.log(response.data);
+  return response.data
 }
 
 export async function patchTodo(
@@ -65,9 +66,13 @@ export async function getUploadUrl(
       'Authorization': `Bearer ${idToken}`
     }
   })
+  console.log(response.data);
   return response.data.uploadUrl
 }
 
 export async function uploadFile(uploadUrl: string, file: Buffer): Promise<void> {
-  await Axios.put(uploadUrl, file)
+  await fetch(uploadUrl,{
+    method: 'PUT',
+    body: file
+  })
 }

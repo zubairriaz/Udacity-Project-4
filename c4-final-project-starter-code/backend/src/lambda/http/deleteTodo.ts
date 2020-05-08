@@ -5,6 +5,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } f
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   
+try {
   if (!(await deleteTodo(event))) {
     return {
       statusCode: 404,
@@ -13,6 +14,16 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
       })
     };
   }
+} catch (error) {
+  return {
+    statusCode: 404,
+    body: JSON.stringify({
+      error:error
+    })
+  };
+}
+
+
 
   // TODO: Remove a TODO item by id
   return {

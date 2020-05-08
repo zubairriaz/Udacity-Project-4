@@ -7,20 +7,27 @@ import {createTodo} from "../../busineesLogic/todos";
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const newTodo: CreateTodoRequest = JSON.parse(event.body)
-
+try {
   const newTodoItem = await createTodo(event,newTodo);
-
   return {
     statusCode: 201,
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true
     },
-    body: JSON.stringify({
-      newTodoItem
-    })
+    body: JSON.stringify(newTodoItem)
   }
 
-  
-  
+
+} catch (error) {
+  return {
+    statusCode: 400,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true
+    },
+    body: JSON.stringify(error)
+  }
+}
+ 
 }
